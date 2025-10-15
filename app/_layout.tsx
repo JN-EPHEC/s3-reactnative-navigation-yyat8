@@ -2,6 +2,13 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { View, Text, StyleSheet } from "react-native";
 
+
+export type RootStackParamList = {
+  PostList: undefined;
+  PostDetail: { postId: string; title: string; content: string };
+};
+
+
 const Tab = createBottomTabNavigator();
 
 // --- Ecrans directement dans le layout ---
