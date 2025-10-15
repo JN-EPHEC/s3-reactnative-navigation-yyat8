@@ -1,28 +1,65 @@
-import "react-native-reanimated";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import PostListScreen from "./screens/PostListScreen";
-import PostDetailScreen from "./screens/PostDetailScreen";
+import React from "react";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { View, Text, StyleSheet } from "react-native";
 
-export type RootStackParamList = {
-  PostList: undefined;
-  PostDetail: { postId: string; title: string; content: string };
-};
+const Tab = createBottomTabNavigator();
 
-export default function RootLayout() {
-  const Stack = createNativeStackNavigator<RootStackParamList>();
-
+// --- Ecrans directement dans le layout ---
+function HomeScreen() {
   return (
-    <Stack.Navigator initialRouteName="PostList">
-      <Stack.Screen
-        name="PostList"
-        component={PostListScreen}
-        options={{ title: "Blog Posts" }}
-      />
-      <Stack.Screen
-        name="PostDetail"
-        component={PostDetailScreen}
-        options={{ title: "Post Details" }}
-      />
-    </Stack.Navigator>
+    <View style={styles.container}>
+      <Text style={styles.text}>Bienvenue dans l'application !</Text>
+    </View>
   );
 }
+
+function ProfileScreen() {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.text}>Nom : John Doe</Text>
+      <Text style={styles.text}>Nom d'utilisateur : @johndoe</Text>
+    </View>
+  );
+}
+
+function SettingsScreen() {
+  return (
+    <View style={styles.container}>
+      <Text style={styles.text}>Paramètres de l'application</Text>
+    </View>
+  );
+}
+
+// --- Tab Navigator ---
+export default function RootLayout() {
+  return (
+    <Tab.Navigator
+      screenOptions={{
+        headerShown: false,
+        tabBarActiveTintColor: "tomato",
+        tabBarInactiveTintColor: "gray",
+      }}
+    >
+      <Tab.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{ tabBarLabel: "Accueil", tabBarIcon: () => <Text>🏠</Text> }}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={ProfileScreen}
+        options={{ tabBarLabel: "Profil", tabBarIcon: () => <Text>👤</Text> }}
+      />
+      <Tab.Screen
+        name="Settings"
+        component={SettingsScreen}
+        options={{ tabBarLabel: "Paramètres", tabBarIcon: () => <Text>⚙️</Text> }}
+      />
+    </Tab.Navigator>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: { flex: 1, justifyContent: "center", alignItems: "center" },
+  text: { fontSize: 18, fontWeight: "bold", textAlign: "center" },
+});
