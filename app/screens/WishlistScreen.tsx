@@ -15,7 +15,7 @@ export default function WishlistScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f8fafc",
+    backgroundColor: "#f2fbff",
     alignItems: "center",
     justifyContent: "center",
     padding: 24,
@@ -24,12 +24,12 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     fontWeight: "600",
-    color: "#0f172a",
+    color: "#2563eb",
     textAlign: "center",
   },
   subtitle: {
     fontSize: 15,
-    color: "#475569",
+    color: "#0f172a",
     textAlign: "center",
     lineHeight: 22,
   },

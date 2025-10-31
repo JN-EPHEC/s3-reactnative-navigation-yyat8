@@ -75,25 +75,25 @@ export default function CourseListScreen({ navigation }: Props) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f8fafc",
+    backgroundColor: "#fdf7ff",
   },
   listContent: {
     padding: 16,
   },
   card: {
-    backgroundColor: "#fff",
+    backgroundColor: "#fff8f2",
     paddingVertical: 16,
     paddingHorizontal: 20,
     borderRadius: 12,
     gap: 8,
     marginBottom: 14,
     borderWidth: 1,
-    borderColor: "#e2e8f0",
-    shadowColor: "#000",
-    shadowOpacity: 0.05,
-    shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 6,
-    elevation: 2,
+    borderColor: "#ffe2d5",
+    shadowColor: "#ffa94d",
+    shadowOpacity: 0.12,
+    shadowOffset: { width: 0, height: 4 },
+    shadowRadius: 12,
+    elevation: 4,
   },
   cardPressed: {
     transform: [{ scale: 0.98 }],
@@ -113,6 +113,6 @@ const styles = StyleSheet.create({
     marginTop: 8,
     fontSize: 13,
     fontWeight: "600",
-    color: "#2563eb",
+    color: "#f97316",
   },
 });

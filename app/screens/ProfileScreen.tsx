@@ -2,11 +2,11 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
 const PROFILE = {
-  name: "Alex Martin",
-  role: "Product Designer & Frontend Developer",
-  email: "alex.martin@example.com",
-  bio: "Curious about crafting human-centered experiences and mentoring junior developers.",
-  interests: ["React Native", "Motion Design", "Design Systems"],
+  name: "Aya Taifour",
+  role: "3ème année e-business, spécialisation Business Analyst à l'EPHEC",
+  email: "he134023@students.ephec.be",
+  bio: "J'aime voyager et coder pour transformer des idées en expériences concrètes.",
+  interests: ["Analyse de données", "Automatisation des processus", "Innovation produit"],
 };
 
 export default function ProfileScreen() {
@@ -37,45 +37,45 @@ export default function ProfileScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#f1f5f9",
+    backgroundColor: "#f4f3ff",
     padding: 20,
     alignItems: "center",
     justifyContent: "center",
   },
   card: {
     width: "100%",
-    backgroundColor: "#fff",
+    backgroundColor: "#fff7ed",
     borderRadius: 20,
     padding: 24,
     gap: 16,
     borderWidth: 1,
-    borderColor: "#e2e8f0",
-    shadowColor: "#000",
-    shadowOpacity: 0.05,
-    shadowOffset: { width: 0, height: 4 },
-    shadowRadius: 12,
-    elevation: 6,
+    borderColor: "#fed7aa",
+    shadowColor: "#fb923c",
+    shadowOpacity: 0.12,
+    shadowOffset: { width: 0, height: 6 },
+    shadowRadius: 16,
+    elevation: 8,
   },
   name: {
     fontSize: 24,
     fontWeight: "700",
-    color: "#0f172a",
+    color: "#fb7185",
   },
   role: {
     fontSize: 16,
     fontWeight: "500",
-    color: "#2563eb",
+    color: "#0284c7",
   },
   sectionLabel: {
     fontSize: 13,
     fontWeight: "600",
     textTransform: "uppercase",
     letterSpacing: 0.7,
-    color: "#64748b",
+    color: "#6366f1",
   },
   value: {
     fontSize: 15,
-    color: "#1e293b",
+    color: "#0f172a",
     lineHeight: 22,
   },
   chipsRow: {
@@ -84,16 +84,16 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   chip: {
-    backgroundColor: "#eff6ff",
+    backgroundColor: "#e0f2fe",
     paddingVertical: 6,
     paddingHorizontal: 12,
     borderRadius: 999,
     borderWidth: 1,
-    borderColor: "#bfdbfe",
+    borderColor: "#bae6fd",
   },
   chipText: {
     fontSize: 13,
     fontWeight: "600",
-    color: "#1d4ed8",
+    color: "#0284c7",
   },
 });
