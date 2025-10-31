@@ -1,107 +1,134 @@
 import "react-native-reanimated";
 import React from "react";
-import { View, Text, FlatList, Pressable } from "react-native";
+import { Text, TouchableOpacity } from "react-native";
+import { DrawerActions, useNavigation } from "@react-navigation/native";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { Ionicons } from "@expo/vector-icons";
 
-export type RootStackParamList = {
-  PostList: undefined;
-  PostDetail: { postId: string; title: string; content: string };
+import CourseListScreen from "./screens/CourseListScreen";
+import CourseDetailScreen from "./screens/CourseDetailScreen";
+import WishlistScreen from "./screens/WishlistScreen";
+import ProfileScreen from "./screens/ProfileScreen";
+
+export type CourseStackParamList = {
+  CourseList: undefined;
+  CourseDetail: { courseId: string; title: string; description: string };
 };
 
-// Sample product data
-const PRODUCTS = [
-  { id: "1", title: "Product 1", description: "Description of Product 1" },
-  { id: "2", title: "Product 2", description: "Description of Product 2" },
-  { id: "3", title: "Product 3", description: "Description of Product 3" },
-];
+type CourseTabsParamList = {
+  AllCourses: undefined;
+  Wishlist: undefined;
+};
 
-// Product List Screen
-function ProductListScreen({ navigation }) {
+type DrawerParamList = {
+  Courses: undefined;
+  Profile: undefined;
+};
+
+const Drawer = createDrawerNavigator<DrawerParamList>();
+const Tab = createBottomTabNavigator<CourseTabsParamList>();
+const CourseStack = createNativeStackNavigator<CourseStackParamList>();
+
+function DrawerHamburger() {
+  const navigation = useNavigation();
+
+  function handleToggleDrawer() {
+    navigation.dispatch(DrawerActions.toggleDrawer());
+  }
+
   return (
-    <FlatList
-      data={PRODUCTS}
-      keyExtractor={(item) => item.id}
-      renderItem={({ item }) => (
-        <Pressable
-          onPress={() =>
-            navigation.navigate("ProductDetail", {
-              product: item,
-            })
-          }
-          style={{
-            padding: 20,
-            borderBottomWidth: 1,
-            borderBottomColor: "#ccc",
-          }}
-        >
-          <Text style={{ fontSize: 18 }}>{item.title}</Text>
-        </Pressable>
-      )}
-    />
+    <TouchableOpacity
+      onPress={handleToggleDrawer}
+      style={{ paddingHorizontal: 12, paddingVertical: 4 }}
+      accessibilityLabel="Open drawer navigation"
+    >
+      <Text style={{ fontSize: 20 }}>☰</Text>
+    </TouchableOpacity>
   );
 }
 
-// Product Detail Screen
-function ProductDetailScreen({ route }) {
-  const { product } = route.params;
+function CourseStackScreen() {
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center", padding: 20 }}>
-      <Text style={{ fontSize: 24, fontWeight: "bold", marginBottom: 10 }}>{product.title}</Text>
-      <Text style={{ fontSize: 16 }}>{product.description}</Text>
-    </View>
+    <CourseStack.Navigator
+      screenOptions={{
+        headerTitleAlign: "center",
+        headerLeft: () => <DrawerHamburger />,
+      }}
+    >
+      <CourseStack.Screen
+        name="CourseList"
+        component={CourseListScreen}
+        options={{ title: "All Courses" }}
+      />
+      <CourseStack.Screen
+        name="CourseDetail"
+        component={CourseDetailScreen}
+        options={({ route }) => ({
+          title: route.params.title,
+        })}
+      />
+    </CourseStack.Navigator>
   );
 }
 
-// Shop Stack Navigator
-const ShopStack = createNativeStackNavigator();
-
-function ShopStackScreen() {
-  return (
-    <ShopStack.Navigator>
-      <ShopStack.Screen name="ProductList" component={ProductListScreen} options={{ title: "Shop" }} />
-      <ShopStack.Screen name="ProductDetail" component={ProductDetailScreen} options={{ title: "Product Details" }} />
-    </ShopStack.Navigator>
-  );
-}
-
-// My Cart Screen
-function MyCartScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Your Shopping Cart is empty.</Text>
-    </View>
-  );
-}
-
-// Bottom Tab Navigator
-const Tab = createBottomTabNavigator();
-
-export default function RootLayout() {
+function CoursesTabs() {
   return (
     <Tab.Navigator
       screenOptions={{
-        headerShown: false,
-        tabBarActiveTintColor: "#FF5733",
-        tabBarInactiveTintColor: "007AFF",
+        headerTitleAlign: "center",
+        tabBarActiveTintColor: "#2563eb",
+        tabBarInactiveTintColor: "#64748b",
       }}
     >
       <Tab.Screen
-        name="Shop"
-        component={ShopStackScreen}
+        name="AllCourses"
+        component={CourseStackScreen}
         options={{
-          tabBarLabel: "Shop",
-          tabBarIcon: () => <Text style={{ fontSize: 20 }}>🛒</Text>,
+          headerShown: false,
+          tabBarLabel: "All Courses",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="book-outline" size={size} color={color} />
+          ),
         }}
       />
       <Tab.Screen
-        name="MyCart"
-        component={MyCartScreen}
+        name="Wishlist"
+        component={WishlistScreen}
         options={{
-          tabBarLabel: "My Cart",
-          tabBarIcon: () => <Text style={{ fontSize: 20 }}>🛍️</Text>,
+          title: "My Wishlist",
+          headerLeft: () => <DrawerHamburger />,
+          tabBarLabel: "Wishlist",
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="heart-outline" size={size} color={color} />
+          ),
         }}
       />
     </Tab.Navigator>
+  );
+}
+
+export default function RootLayout() {
+  return (
+    <Drawer.Navigator
+      screenOptions={{
+        headerTitleAlign: "center",
+      }}
+    >
+      <Drawer.Screen
+        name="Courses"
+        component={CoursesTabs}
+        options={{ headerShown: false }}
+      />
+      <Drawer.Screen
+        name="Profile"
+        component={ProfileScreen}
+        options={{
+          title: "My Profile",
+          headerLeft: () => <DrawerHamburger />,
+        }}
+      />
+    </Drawer.Navigator>
   );
 }
