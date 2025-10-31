@@ -1,5 +1,12 @@
 import React from "react";
-import { FlatList, Pressable, StyleSheet, Text, View, Platform } from "react-native";
+import {
+  FlatList,
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+  Platform,
+} from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -14,30 +21,60 @@ const PRIMARY_FONT = Platform.select({
   default: "System",
 });
 
-const COURSES = [
+type CourseCard = {
+  id: string;
+  title: string;
+  tagline: string;
+  description: string;
+  icon: keyof typeof Ionicons.glyphMap;
+  iconColor: string;
+};
+
+const COURSES: CourseCard[] = [
   {
     id: "rn101",
     title: "Introduction à React Native",
+    tagline: "Construire des apps iOS/Android avec un seul code base",
+    icon: "phone-portrait-outline" as const,
+    iconColor: "#6366f1",
     description:
-      "Apprenez à créer des applications mobiles natives avec React, en découvrant les composants, l'état et les API essentielles.",
+      "Découverte des composants, gestion de l'état et intégration d'API pour créer des expériences mobiles performantes.",
   },
   {
     id: "js300",
     title: "JavaScript avancé",
+    tagline: "Devenir expert en logique et performances JS",
+    icon: "code-slash-outline" as const,
+    iconColor: "#f97316",
     description:
-      "Maîtrisez les closures, les patterns asynchrones et optimisez les performances pour des applications web robustes.",
+      "Closures, patterns asynchrones, mémoire et optimisation : tout pour écrire un JavaScript solide, élégant et maintenable.",
   },
   {
     id: "ux210",
     title: "UI/UX pour développeurs",
+    tagline: "Designer des parcours intuitifs et accessibles",
+    icon: "color-palette-outline" as const,
+    iconColor: "#ec4899",
     description:
-      "Comprenez les principes d'accessibilité et de design pour transformer de belles interfaces en expérience utilisateur fluide.",
+      "Principes d'accessibilité, grille, typographie et design systems pour traduire une intention UX en interface concrète.",
   },
   {
     id: "data105",
     title: "Stratégies de récupération de données",
+    tagline: "REST, GraphQL & caching pour scaler en douceur",
+    icon: "cloud-download-outline" as const,
+    iconColor: "#14b8a6",
     description:
-      "Comparez REST, GraphQL et les stratégies de mise en cache pour des applications évolutives et performantes.",
+      "Comparaison des approches REST/GraphQL, mise en cache, requêtes progressives et bonnes pratiques de monitoring.",
+  },
+  {
+    id: "ai210",
+    title: "Prototyper avec l'IA générative",
+    tagline: "Utiliser l'IA comme copilote produit/design",
+    icon: "sparkles-outline" as const,
+    iconColor: "#8b5cf6",
+    description:
+      "Prompting, génération de maquettes et assistants spécialisés pour accélérer la phase de conception sans perdre en qualité.",
   },
 ];
 
@@ -92,7 +129,25 @@ export default function CourseListScreen({ navigation }: Props) {
               pressed && styles.cardPressed,
             ]}
           >
-            <Text style={styles.title}>{item.title}</Text>
+            <View style={styles.headerRow}>
+              <View
+                style={[
+                  styles.iconBadge,
+                  { backgroundColor: `${item.iconColor}1A` },
+                  { borderColor: item.iconColor },
+                ]}
+              >
+                <Ionicons
+                  name={item.icon}
+                  size={26}
+                  color={item.iconColor}
+                />
+              </View>
+              <View style={styles.headerText}>
+                <Text style={styles.title}>{item.title}</Text>
+                <Text style={styles.tagline}>{item.tagline}</Text>
+              </View>
+            </View>
             <Text style={styles.description}>{item.description}</Text>
             <Text style={styles.moreLink}>Découvrir le programme</Text>
           </Pressable>
@@ -159,6 +214,29 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "600",
     color: "#2d2a44",
+    fontFamily: PRIMARY_FONT,
+  },
+  headerRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
+    marginBottom: 10,
+  },
+  iconBadge: {
+    width: 52,
+    height: 52,
+    borderRadius: 16,
+    justifyContent: "center",
+    alignItems: "center",
+    borderWidth: 1.5,
+  },
+  headerText: {
+    flex: 1,
+    gap: 4,
+  },
+  tagline: {
+    fontSize: 13,
+    color: "#5145cd",
     fontFamily: PRIMARY_FONT,
   },
   description: {
