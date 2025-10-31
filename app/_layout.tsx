@@ -44,7 +44,7 @@ function DrawerHamburger() {
       style={{ paddingHorizontal: 12, paddingVertical: 4 }}
       accessibilityLabel="Ouvrir le menu principal"
     >
-      <Ionicons name="menu-outline" size={26} color="#312e81" />
+      <Ionicons name="menu-outline" size={26} color="#403a70" />
     </TouchableOpacity>
   );
 }
@@ -54,9 +54,9 @@ function CourseStackScreen() {
     <CourseStack.Navigator
       screenOptions={{
         headerTitleAlign: "center",
-        headerTintColor: "#312e81",
-        headerStyle: { backgroundColor: "#ede9ff" },
-        headerTitleStyle: { color: "#1f1f46", fontSize: 18 },
+        headerTintColor: "#403a70",
+        headerStyle: { backgroundColor: "#dcd0ff" },
+        headerTitleStyle: { color: "#403a70", fontSize: 18, fontWeight: "600" },
         headerRight: () => <DrawerHamburger />,
       }}
     >
@@ -82,9 +82,9 @@ function CoursesTabs() {
     <Tab.Navigator
       screenOptions={{
         headerTitleAlign: "center",
-        tabBarActiveTintColor: "#4c51bf",
-        tabBarInactiveTintColor: "#a5b4fc",
-        tabBarStyle: { backgroundColor: "#ede9fe" },
+        tabBarActiveTintColor: "#5145cd",
+        tabBarInactiveTintColor: "#b4c1ff",
+        tabBarStyle: { backgroundColor: "#e6dcff" },
       }}
     >
       <Tab.Screen
@@ -104,9 +104,9 @@ function CoursesTabs() {
         options={{
           title: "Ma liste d'envies",
           headerRight: () => <DrawerHamburger />,
-          headerTintColor: "#312e81",
-          headerStyle: { backgroundColor: "#ede9ff" },
-          headerTitleStyle: { color: "#1f1f46", fontSize: 18 },
+          headerTintColor: "#403a70",
+          headerStyle: { backgroundColor: "#dcd0ff" },
+          headerTitleStyle: { color: "#403a70", fontSize: 18, fontWeight: "600" },
           tabBarLabel: "Mes envies",
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="heart-outline" size={size} color={color} />
@@ -122,11 +122,12 @@ export default function RootLayout() {
     <Drawer.Navigator
       screenOptions={{
         headerTitleAlign: "center",
-        headerTintColor: "#312e81",
-        headerStyle: { backgroundColor: "#ede9ff" },
-        headerTitleStyle: { color: "#1f1f46", fontSize: 18 },
-        drawerActiveTintColor: "#4c51bf",
-        drawerInactiveTintColor: "#312e81",
+        headerTintColor: "#403a70",
+        headerStyle: { backgroundColor: "#dcd0ff" },
+        headerTitleStyle: { color: "#403a70", fontSize: 18, fontWeight: "600" },
+        drawerActiveTintColor: "#5145cd",
+        drawerInactiveTintColor: "#403a70",
+        drawerStyle: { backgroundColor: "#f1ecff" },
       }}
     >
       <Drawer.Screen
