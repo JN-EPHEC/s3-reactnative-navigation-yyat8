@@ -1,81 +1,86 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
+import GradientBackground from "../../components/GradientBackground";
+
 const PROFILE = {
   name: "Aya Taifour",
-  role: "3ème année e-business, spécialisation Business Analyst à l'EPHEC",
+  role: "Étudiante en 3ᵉ année e-business, spécialisation Business Analyst à l'EPHEC",
   email: "he134023@students.ephec.be",
   bio: "J'aime voyager et coder pour transformer des idées en expériences concrètes.",
-  interests: ["Analyse de données", "Automatisation des processus", "Innovation produit"],
+  learningGoals: [
+    "Approfondir l'analyse de données métier",
+    "Automatiser des processus avec des outils no-code",
+    "Concevoir des tableaux de bord orientés décision",
+  ],
 };
 
 export default function ProfileScreen() {
   return (
-    <View style={styles.container}>
+    <GradientBackground contentStyle={styles.container}>
       <View style={styles.card}>
         <Text style={styles.name}>{PROFILE.name}</Text>
         <Text style={styles.role}>{PROFILE.role}</Text>
-        <Text style={styles.sectionLabel}>Contact</Text>
+        <Text style={styles.sectionLabel}>Mes coordonnées</Text>
         <Text style={styles.value}>{PROFILE.email}</Text>
 
-        <Text style={styles.sectionLabel}>About</Text>
+        <Text style={styles.sectionLabel}>À propos</Text>
         <Text style={styles.value}>{PROFILE.bio}</Text>
 
-        <Text style={styles.sectionLabel}>Learning Goals</Text>
+        <Text style={styles.sectionLabel}>Objectifs d'apprentissage</Text>
         <View style={styles.chipsRow}>
-          {PROFILE.interests.map((interest) => (
-            <View key={interest} style={styles.chip}>
-              <Text style={styles.chipText}>{interest}</Text>
+          {PROFILE.learningGoals.map((goal) => (
+            <View key={goal} style={styles.chip}>
+              <Text style={styles.chipText}>{goal}</Text>
             </View>
           ))}
         </View>
       </View>
-    </View>
+    </GradientBackground>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: "#f4f3ff",
-    padding: 20,
-    alignItems: "center",
     justifyContent: "center",
+    alignItems: "center",
+    paddingHorizontal: 16,
+    paddingVertical: 24,
   },
   card: {
     width: "100%",
-    backgroundColor: "#fff7ed",
-    borderRadius: 20,
-    padding: 24,
+    backgroundColor: "rgba(255, 255, 255, 0.9)",
+    borderRadius: 24,
+    padding: 26,
     gap: 16,
-    borderWidth: 1,
-    borderColor: "#fed7aa",
-    shadowColor: "#fb923c",
-    shadowOpacity: 0.12,
-    shadowOffset: { width: 0, height: 6 },
-    shadowRadius: 16,
-    elevation: 8,
+    borderWidth: 1.5,
+    borderColor: "rgba(255, 255, 255, 0.55)",
+    shadowColor: "rgba(76, 72, 255, 0.36)",
+    shadowOpacity: 0.33,
+    shadowOffset: { width: 0, height: 14 },
+    shadowRadius: 26,
+    elevation: 10,
   },
   name: {
     fontSize: 24,
     fontWeight: "700",
-    color: "#fb7185",
+    color: "#5b21b6",
   },
   role: {
     fontSize: 16,
     fontWeight: "500",
-    color: "#0284c7",
+    color: "#1d4ed8",
   },
   sectionLabel: {
     fontSize: 13,
     fontWeight: "600",
     textTransform: "uppercase",
     letterSpacing: 0.7,
-    color: "#6366f1",
+    color: "#4338ca",
   },
   value: {
     fontSize: 15,
-    color: "#0f172a",
+    color: "#1f2937",
     lineHeight: 22,
   },
   chipsRow: {
@@ -84,16 +89,16 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   chip: {
-    backgroundColor: "#e0f2fe",
+    backgroundColor: "rgba(148, 163, 255, 0.25)",
     paddingVertical: 6,
     paddingHorizontal: 12,
     borderRadius: 999,
-    borderWidth: 1,
-    borderColor: "#bae6fd",
+    borderWidth: 1.2,
+    borderColor: "rgba(99, 102, 241, 0.6)",
   },
   chipText: {
     fontSize: 13,
     fontWeight: "600",
-    color: "#0284c7",
+    color: "#312e81",
   },
 });

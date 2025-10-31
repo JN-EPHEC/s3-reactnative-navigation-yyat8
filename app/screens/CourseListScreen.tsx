@@ -1,41 +1,36 @@
 import React from "react";
-import {
-  FlatList,
-  Pressable,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import { FlatList, Pressable, StyleSheet, Text } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 import { CourseStackParamList } from "../_layout";
+import GradientBackground from "../../components/GradientBackground";
 
 type Props = NativeStackScreenProps<CourseStackParamList, "CourseList">;
 
 const COURSES = [
   {
     id: "rn101",
-    title: "Intro to React Native",
+    title: "Introduction à React Native",
     description:
-      "Build native mobile apps using React. Learn components, state, and core APIs.",
+      "Apprenez à créer des applications mobiles natives avec React, en découvrant les composants, l'état et les API essentielles.",
   },
   {
     id: "js300",
-    title: "Advanced JavaScript",
+    title: "JavaScript avancé",
     description:
-      "Deep dive into closures, async patterns, and performance profiling.",
+      "Maîtrisez les closures, les patterns asynchrones et optimisez les performances pour des applications web robustes.",
   },
   {
     id: "ux210",
-    title: "UI/UX for Developers",
+    title: "UI/UX pour développeurs",
     description:
-      "Design accessible, beautiful interfaces and translate them into code.",
+      "Comprenez les principes d'accessibilité et de design pour transformer de belles interfaces en expérience utilisateur fluide.",
   },
   {
     id: "data105",
-    title: "Data Fetching Strategies",
+    title: "Stratégies de récupération de données",
     description:
-      "Compare REST, GraphQL, and caching patterns for scalable apps.",
+      "Comparez REST, GraphQL et les stratégies de mise en cache pour des applications évolutives et performantes.",
   },
 ];
 
@@ -49,10 +44,11 @@ export default function CourseListScreen({ navigation }: Props) {
   }
 
   return (
-    <View style={styles.container}>
+    <GradientBackground contentStyle={styles.wrapper}>
       <FlatList
         data={COURSES}
         keyExtractor={(item) => item.id}
+        showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.listContent}
         renderItem={({ item }) => (
           <Pressable
@@ -64,36 +60,36 @@ export default function CourseListScreen({ navigation }: Props) {
           >
             <Text style={styles.title}>{item.title}</Text>
             <Text style={styles.description}>{item.description}</Text>
-            <Text style={styles.moreLink}>View details →</Text>
+            <Text style={styles.moreLink}>Découvrir le programme</Text>
           </Pressable>
         )}
       />
-    </View>
+    </GradientBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fdf7ff",
+  wrapper: {
+    paddingVertical: 16,
+    paddingHorizontal: 16,
   },
   listContent: {
     padding: 16,
   },
   card: {
-    backgroundColor: "#fff8f2",
+    backgroundColor: "rgba(255, 255, 255, 0.86)",
     paddingVertical: 16,
     paddingHorizontal: 20,
     borderRadius: 12,
     gap: 8,
     marginBottom: 14,
-    borderWidth: 1,
-    borderColor: "#ffe2d5",
-    shadowColor: "#ffa94d",
-    shadowOpacity: 0.12,
-    shadowOffset: { width: 0, height: 4 },
-    shadowRadius: 12,
-    elevation: 4,
+    borderWidth: 1.5,
+    borderColor: "rgba(255, 255, 255, 0.45)",
+    shadowColor: "rgba(96, 72, 255, 0.35)",
+    shadowOpacity: 0.3,
+    shadowOffset: { width: 0, height: 10 },
+    shadowRadius: 20,
+    elevation: 7,
   },
   cardPressed: {
     transform: [{ scale: 0.98 }],
@@ -113,6 +109,6 @@ const styles = StyleSheet.create({
     marginTop: 8,
     fontSize: 13,
     fontWeight: "600",
-    color: "#f97316",
+    color: "#6d28d9",
   },
 });

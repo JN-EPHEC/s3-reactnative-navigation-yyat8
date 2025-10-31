@@ -1,6 +1,6 @@
 import "react-native-reanimated";
 import React from "react";
-import { Text, TouchableOpacity } from "react-native";
+import { TouchableOpacity } from "react-native";
 import { DrawerActions, useNavigation } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -42,9 +42,9 @@ function DrawerHamburger() {
     <TouchableOpacity
       onPress={handleToggleDrawer}
       style={{ paddingHorizontal: 12, paddingVertical: 4 }}
-      accessibilityLabel="Open drawer navigation"
+      accessibilityLabel="Ouvrir le menu principal"
     >
-      <Text style={{ fontSize: 20 }}>☰</Text>
+      <Ionicons name="menu-outline" size={26} color="#312e81" />
     </TouchableOpacity>
   );
 }
@@ -54,19 +54,23 @@ function CourseStackScreen() {
     <CourseStack.Navigator
       screenOptions={{
         headerTitleAlign: "center",
-        headerLeft: () => <DrawerHamburger />,
+        headerTintColor: "#312e81",
+        headerStyle: { backgroundColor: "#ede9ff" },
+        headerTitleStyle: { color: "#1f1f46", fontSize: 18 },
+        headerRight: () => <DrawerHamburger />,
       }}
     >
       <CourseStack.Screen
         name="CourseList"
         component={CourseListScreen}
-        options={{ title: "All Courses" }}
+        options={{ title: "Tous les cours" }}
       />
       <CourseStack.Screen
         name="CourseDetail"
         component={CourseDetailScreen}
         options={({ route }) => ({
           title: route.params.title,
+          headerBackTitle: "Retour",
         })}
       />
     </CourseStack.Navigator>
@@ -78,8 +82,9 @@ function CoursesTabs() {
     <Tab.Navigator
       screenOptions={{
         headerTitleAlign: "center",
-        tabBarActiveTintColor: "#2563eb",
-        tabBarInactiveTintColor: "#64748b",
+        tabBarActiveTintColor: "#4c51bf",
+        tabBarInactiveTintColor: "#a5b4fc",
+        tabBarStyle: { backgroundColor: "#ede9fe" },
       }}
     >
       <Tab.Screen
@@ -87,7 +92,7 @@ function CoursesTabs() {
         component={CourseStackScreen}
         options={{
           headerShown: false,
-          tabBarLabel: "All Courses",
+          tabBarLabel: "Catalogue",
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="book-outline" size={size} color={color} />
           ),
@@ -97,9 +102,12 @@ function CoursesTabs() {
         name="Wishlist"
         component={WishlistScreen}
         options={{
-          title: "My Wishlist",
-          headerLeft: () => <DrawerHamburger />,
-          tabBarLabel: "Wishlist",
+          title: "Ma liste d'envies",
+          headerRight: () => <DrawerHamburger />,
+          headerTintColor: "#312e81",
+          headerStyle: { backgroundColor: "#ede9ff" },
+          headerTitleStyle: { color: "#1f1f46", fontSize: 18 },
+          tabBarLabel: "Mes envies",
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="heart-outline" size={size} color={color} />
           ),
@@ -114,18 +122,24 @@ export default function RootLayout() {
     <Drawer.Navigator
       screenOptions={{
         headerTitleAlign: "center",
+        headerTintColor: "#312e81",
+        headerStyle: { backgroundColor: "#ede9ff" },
+        headerTitleStyle: { color: "#1f1f46", fontSize: 18 },
+        drawerActiveTintColor: "#4c51bf",
+        drawerInactiveTintColor: "#312e81",
       }}
     >
       <Drawer.Screen
         name="Courses"
         component={CoursesTabs}
-        options={{ headerShown: false }}
+        options={{ headerShown: false, title: "Cours", drawerLabel: "Cours" }}
       />
       <Drawer.Screen
         name="Profile"
         component={ProfileScreen}
         options={{
-          title: "My Profile",
+          title: "Mes informations",
+          drawerLabel: "Mes informations",
           headerLeft: () => <DrawerHamburger />,
         }}
       />
