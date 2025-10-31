@@ -12,6 +12,7 @@ import { Ionicons } from "@expo/vector-icons";
 
 import { CourseStackParamList } from "../_layout";
 import GradientBackground from "../../components/GradientBackground";
+import { COURSES, CourseInfo } from "../../constants/courses";
 
 type Props = NativeStackScreenProps<CourseStackParamList, "CourseList">;
 
@@ -21,69 +22,10 @@ const PRIMARY_FONT = Platform.select({
   default: "System",
 });
 
-type CourseCard = {
-  id: string;
-  title: string;
-  tagline: string;
-  description: string;
-  icon: keyof typeof Ionicons.glyphMap;
-  iconColor: string;
-};
-
-const COURSES: CourseCard[] = [
-  {
-    id: "rn101",
-    title: "Introduction à React Native",
-    tagline: "Construire des apps iOS/Android avec un seul code base",
-    icon: "phone-portrait-outline" as const,
-    iconColor: "#6366f1",
-    description:
-      "Découverte des composants, gestion de l'état et intégration d'API pour créer des expériences mobiles performantes.",
-  },
-  {
-    id: "js300",
-    title: "JavaScript avancé",
-    tagline: "Devenir expert en logique et performances JS",
-    icon: "code-slash-outline" as const,
-    iconColor: "#f97316",
-    description:
-      "Closures, patterns asynchrones, mémoire et optimisation : tout pour écrire un JavaScript solide, élégant et maintenable.",
-  },
-  {
-    id: "ux210",
-    title: "UI/UX pour développeurs",
-    tagline: "Designer des parcours intuitifs et accessibles",
-    icon: "color-palette-outline" as const,
-    iconColor: "#ec4899",
-    description:
-      "Principes d'accessibilité, grille, typographie et design systems pour traduire une intention UX en interface concrète.",
-  },
-  {
-    id: "data105",
-    title: "Stratégies de récupération de données",
-    tagline: "REST, GraphQL & caching pour scaler en douceur",
-    icon: "cloud-download-outline" as const,
-    iconColor: "#14b8a6",
-    description:
-      "Comparaison des approches REST/GraphQL, mise en cache, requêtes progressives et bonnes pratiques de monitoring.",
-  },
-  {
-    id: "ai210",
-    title: "Prototyper avec l'IA générative",
-    tagline: "Utiliser l'IA comme copilote produit/design",
-    icon: "sparkles-outline" as const,
-    iconColor: "#8b5cf6",
-    description:
-      "Prompting, génération de maquettes et assistants spécialisés pour accélérer la phase de conception sans perdre en qualité.",
-  },
-];
-
 export default function CourseListScreen({ navigation }: Props) {
-  function handleSelectCourse(course: (typeof COURSES)[number]) {
+  function handleSelectCourse(course: CourseInfo) {
     navigation.navigate("CourseDetail", {
-      courseId: course.id,
-      title: course.title,
-      description: course.description,
+      course,
     });
   }
 

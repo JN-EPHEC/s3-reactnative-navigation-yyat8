@@ -11,10 +11,11 @@ import CourseListScreen from "./screens/CourseListScreen";
 import CourseDetailScreen from "./screens/CourseDetailScreen";
 import WishlistScreen from "./screens/WishlistScreen";
 import ProfileScreen from "./screens/ProfileScreen";
+import { CourseInfo } from "../constants/courses";
 
 export type CourseStackParamList = {
   CourseList: undefined;
-  CourseDetail: { courseId: string; title: string; description: string };
+  CourseDetail: { course: CourseInfo };
 };
 
 type CourseTabsParamList = {
@@ -69,7 +70,7 @@ function CourseStackScreen() {
         name="CourseDetail"
         component={CourseDetailScreen}
         options={({ route }) => ({
-          title: route.params.title,
+          title: route.params.course.title,
           headerBackTitle: "Retour",
         })}
       />
