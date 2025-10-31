@@ -1,7 +1,13 @@
 import React from "react";
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import { FlatList, Platform, StyleSheet, Text, View } from "react-native";
 
 import GradientBackground from "../../components/GradientBackground";
+
+const PRIMARY_FONT = Platform.select({
+  ios: "Avenir Next",
+  android: "sans-serif-medium",
+  default: "System",
+});
 
 const WISHLIST = [
   {
@@ -64,10 +70,12 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "700",
     color: "#2d2a44",
+    fontFamily: PRIMARY_FONT,
   },
   subtitle: {
     fontSize: 14,
     color: "#4c4a78",
+    fontFamily: PRIMARY_FONT,
   },
   listContent: {
     paddingBottom: 40,
@@ -91,15 +99,18 @@ const styles = StyleSheet.create({
     fontSize: 17,
     fontWeight: "600",
     color: "#2d2a44",
+    fontFamily: PRIMARY_FONT,
   },
   cardDescription: {
     fontSize: 14,
     lineHeight: 20,
     color: "#4b5563",
+    fontFamily: PRIMARY_FONT,
   },
   cardHint: {
     fontSize: 12,
     color: "#5145cd",
     fontWeight: "500",
+    fontFamily: PRIMARY_FONT,
   },
 });

@@ -1,11 +1,18 @@
 import React from "react";
-import { FlatList, Pressable, StyleSheet, Text } from "react-native";
+import { FlatList, Pressable, StyleSheet, Text, View, Platform } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { Ionicons } from "@expo/vector-icons";
 
 import { CourseStackParamList } from "../_layout";
 import GradientBackground from "../../components/GradientBackground";
 
 type Props = NativeStackScreenProps<CourseStackParamList, "CourseList">;
+
+const PRIMARY_FONT = Platform.select({
+  ios: "Avenir Next",
+  android: "sans-serif-medium",
+  default: "System",
+});
 
 const COURSES = [
   {
@@ -45,6 +52,33 @@ export default function CourseListScreen({ navigation }: Props) {
 
   return (
     <GradientBackground contentStyle={styles.wrapper}>
+      <View pointerEvents="none" style={styles.decorLayer}>
+        <Ionicons
+          name="book-outline"
+          size={88}
+          color="rgba(80, 70, 205, 0.18)"
+          style={[styles.icon, styles.iconTopLeft]}
+        />
+        <Ionicons
+          name="bar-chart-outline"
+          size={72}
+          color="rgba(79, 110, 227, 0.16)"
+          style={[styles.icon, styles.iconTopRight]}
+        />
+        <Ionicons
+          name="code-slash-outline"
+          size={84}
+          color="rgba(64, 58, 112, 0.16)"
+          style={[styles.icon, styles.iconBottomLeft]}
+        />
+        <Ionicons
+          name="school-outline"
+          size={96}
+          color="rgba(113, 102, 255, 0.14)"
+          style={[styles.icon, styles.iconBottomRight]}
+        />
+      </View>
+
       <FlatList
         data={COURSES}
         keyExtractor={(item) => item.id}
@@ -73,6 +107,32 @@ const styles = StyleSheet.create({
     paddingVertical: 16,
     paddingHorizontal: 16,
   },
+  decorLayer: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+  },
+  icon: {
+    position: "absolute",
+  },
+  iconTopLeft: {
+    top: -6,
+    left: -12,
+  },
+  iconTopRight: {
+    top: 24,
+    right: -18,
+  },
+  iconBottomLeft: {
+    bottom: 120,
+    left: -24,
+  },
+  iconBottomRight: {
+    bottom: -20,
+    right: -10,
+  },
   listContent: {
     padding: 16,
   },
@@ -99,16 +159,19 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "600",
     color: "#2d2a44",
+    fontFamily: PRIMARY_FONT,
   },
   description: {
     fontSize: 14,
     lineHeight: 20,
     color: "#4b5563",
+    fontFamily: PRIMARY_FONT,
   },
   moreLink: {
     marginTop: 8,
     fontSize: 13,
     fontWeight: "600",
     color: "#5145cd",
+    fontFamily: PRIMARY_FONT,
   },
 });

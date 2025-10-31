@@ -1,11 +1,17 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Platform, StyleSheet, Text, View } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 import { CourseStackParamList } from "../_layout";
 import GradientBackground from "../../components/GradientBackground";
 
 type Props = NativeStackScreenProps<CourseStackParamList, "CourseDetail">;
+
+const PRIMARY_FONT = Platform.select({
+  ios: "Avenir Next",
+  android: "sans-serif-medium",
+  default: "System",
+});
 
 export default function CourseDetailScreen({ route }: Props) {
   const { courseId, title, description } = route.params;
@@ -56,21 +62,25 @@ const styles = StyleSheet.create({
     textTransform: "uppercase",
     letterSpacing: 0.8,
     color: "#5145cd",
+    fontFamily: PRIMARY_FONT,
   },
   value: {
     fontSize: 16,
     fontWeight: "600",
     color: "#403a70",
+    fontFamily: PRIMARY_FONT,
   },
   title: {
     fontSize: 22,
     fontWeight: "700",
     color: "#2d2a44",
+    fontFamily: PRIMARY_FONT,
   },
   description: {
     fontSize: 15,
     lineHeight: 22,
     color: "#4b5563",
+    fontFamily: PRIMARY_FONT,
   },
   footer: {
     marginTop: 8,
@@ -81,5 +91,6 @@ const styles = StyleSheet.create({
   footerText: {
     fontSize: 13,
     color: "#475569",
+    fontFamily: PRIMARY_FONT,
   },
 });
